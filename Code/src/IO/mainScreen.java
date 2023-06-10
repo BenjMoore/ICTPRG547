@@ -183,7 +183,8 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         //open();
 
     }
-
+    // DB Component
+    
     // JTable
 
     // Setup JTable
