@@ -1,6 +1,6 @@
 package IO;
 
-
+import java.sql.*;
 import Scripts.BubbleSort;
 import Scripts.InsertionSort;
 import Scripts.SelectionSort;
@@ -35,7 +35,29 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     String msgToBeSent = "";
     String currentQN = "";
     Integer wrongcount = 0;
-    public static void main(String[] args) throws IOException {new mainScreen();}
+
+    public static void main(String[] args) throws IOException
+    {
+
+        new mainScreen();
+        Connection c = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:Data.db");
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Opened database successfully");
+
+    }
+
+
+
+
+
+
 
     public void connect(String serverName, int serverPort) throws InterruptedException {
         txtConnectionStatus.setText("Establishing connection. Please wait ...");
@@ -60,6 +82,7 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
         }
     }
+
     private void send() {
         try {
           msgToBeSent = topicBox.getText() + ": "
@@ -77,6 +100,7 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
             close();
         }
     }
+
     public void handle(String msg) {
         if (msg.equals(".bye")) {
             println("Good bye. Press EXIT button to exit ...");
@@ -185,11 +209,8 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     }
     // DB Component
 
-    public static void forName(String className)throws ClassNotFoundException{}  
-    public void dbload() throws ClassNotFoundException
-    {
-        Class.forName("oracle.jdbc.driver.OracleDriver");  
-    }
+
+
     // JTable
 
     // Setup JTable
