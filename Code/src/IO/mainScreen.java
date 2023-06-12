@@ -44,7 +44,7 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:Data.db");
+            c = DriverManager.getConnection("jdbc:sqlite:/SQLite/policies.db");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
