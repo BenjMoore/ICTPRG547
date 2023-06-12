@@ -184,7 +184,12 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
     }
     // DB Component
-    
+
+    public static void forName(String className)throws ClassNotFoundException{}  
+    public void dbload() throws ClassNotFoundException
+    {
+        Class.forName("oracle.jdbc.driver.OracleDriver");  
+    }
     // JTable
 
     // Setup JTable
