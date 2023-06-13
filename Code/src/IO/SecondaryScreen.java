@@ -16,6 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.io.IOException;
+/**
+ * SecondScreen, The client screen to receive questions, send answers and connect to the server
+ *
+ * @author Benjamin Moore
+ *
+ */
 
 public class SecondaryScreen extends JFrame implements ActionListener, MouseListener{
     private Socket socket = null;
@@ -27,8 +33,19 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
     String msgtobesent = "";
     ArrayList<Object[]> al2 = new ArrayList();
 
-
+    /**
+     * Main method, Create New instance of Second Screen
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args)throws IOException {new SecondaryScreen();}
+
+    /**
+     * Connect to server.java
+     * @param serverName Name of the server
+     * @param serverPort Port of the server
+     * @throws InterruptedException If Connection is interupted
+     */
     public void connect(String serverName, int serverPort) throws InterruptedException { try
         {
             this.socket = new Socket(serverName, serverPort);
@@ -46,6 +63,10 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
 
         }
     }
+
+    /**
+     * Send Data Through Socket
+     */
     private void send() {
         try {
 
@@ -58,6 +79,10 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         }
     }
 
+    /**
+     * Handle Messages
+     * @param msg msg to be sent
+     */
     public void handle(String msg) {
         if (msg.equals(".bye")) {
             println("Good bye. Press EXIT button to exit ...");
@@ -83,7 +108,10 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         }
     }
 
-
+    /**
+     * Handle Incoming stream
+     * @throws IOException
+     */
     public void HandleIncoming() throws IOException {
 
         String RecivedString = "";
@@ -114,6 +142,9 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         br.close();
     }
 
+    /**
+     * Open Connection
+     */
     public void open() {
         try {
             streamOut = new DataOutputStream(socket.getOutputStream());
@@ -123,6 +154,9 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         }
     }
 
+    /**
+     * Close Connection
+     */
     public void close() {
         try {
             if (streamOut != null) {
@@ -137,12 +171,20 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         client.stop();
     }
 
+    /**
+     * Display Network Msg
+     * @param msg msg to display (String)
+     */
     void println(String msg) {
         //display.appendText(msg + "\n");
         lblNetworkMessage.setText(msg);
     }
 
-
+    /**
+     * Get Server Parameters
+     * Server Name
+     * Server Port
+     */
     public void getParameters()
     {
 //        serverName = getParameter("host");
@@ -170,6 +212,10 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
 
     ArrayList<Object[]> al = new ArrayList();
 
+    /**
+     * Create Second Screen
+     * @throws IOException
+     */
     public SecondaryScreen() throws IOException
     {
         //initialise main screen
@@ -189,12 +235,21 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         System.out.println("Initial size of al: ");
 }
 
+    /**
+     * Setup Jbuttons
+     * Using UIComponent Library
+     */
     private void SetupButtons()
     {
     btnSubmit = UIComponentLibrary.CreateJButton("Submit",150,20,10,425,this,this,myLayout);
     btnExit = UIComponentLibrary.CreateJButton("Exit",150,20,300,425,this,this,myLayout);
     btnConnect = UIComponentLibrary.CreateJButton("Connect",150,20,10,10,this,this,myLayout);
     }
+
+    /**
+     * Setup Jtext Fields
+     * Using UIComponent Library
+     */
     private void SetupTextfields()
     {
         topicBox = UIComponentLibrary.CreateAJTextField(35,70,90,this,myLayout);
@@ -219,6 +274,10 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
         StaffName.setBorder(border);
 
     }
+    /**
+     * Setup JLabels
+     * Using UIComponent Library
+     */
     private void SetupJlabels()
     {
         txtTitle = UIComponentLibrary.CreateAJLabel("Perfect Policy's", 190,10,this,myLayout);
@@ -246,6 +305,10 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
 
     }
     // action listner add
+
+    /**
+     * Add Window Listener to application
+     */
     private void AddWindowListenerToForm()
     {
         addWindowListener(new WindowAdapter() {
@@ -256,6 +319,11 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
             }
         });
     }
+
+    /**
+     * @Override If action is performed
+     * @param e Exception
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnExit) {
@@ -271,6 +339,11 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
             }
         }
     }
+
+    /**
+     * MouseListener
+     * @param e exception
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
 

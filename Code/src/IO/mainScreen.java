@@ -18,7 +18,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.net.*;
+/**
+ * Mainscreen, The client screen to send questions, receive answers and sort information
+ *
+ * @author Benjamin Moore
+ *
+ */
 
+/**
+ * Jframe Extention, Public class Mainscreen. Implements ActionListener and MouseListener
+ */
 public class mainScreen extends JFrame implements ActionListener, MouseListener {
 
     //CHAT RELATED ---------------------------
@@ -36,6 +45,11 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     String currentQN = "";
     Integer wrongcount = 0;
 
+    /**
+     * Main Method, Create database connection, new mainscreen
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException
     {
 
