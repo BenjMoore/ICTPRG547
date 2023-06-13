@@ -564,6 +564,7 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
     /**
      * Filters and searches through AL
+     *
      */
     public void filterSearch() {
         String text = searchBox.getText();
@@ -705,10 +706,13 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
             // question number, topic, subtopic
             if (currentQN.isEmpty()) { }
+
             else
             {
+
                 currentQN = currentQN + " , Incorrect Answers: " + wrongcount;
                 linkedList.head.append(new Node(" <-->  " + currentQN));
+
             }
             //linkedList.head.append(new Node(" <-->  " + questionBox.getText() + "--" + topicBox.getText() + "--" + subtopicBox.getText()));
             LinkedList.setText(linkedList.toString());
@@ -716,8 +720,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
             myHm.put(txtqnNo.getText(), " || " + questionBox.getText() + "--" + topicBox.getText() + "--" + subtopicBox.getText());
             currentQN = " <-->  " + questionBox.getText() + "--" + topicBox.getText() + "--" + subtopicBox.getText();
             send();
+
         }
-        if (actionEvent.getSource() == btnTopic) {
+        if (actionEvent.getSource() == btnTopic)
+        {
             bubblesort();
             quizModel.fireTableDataChanged();
         }

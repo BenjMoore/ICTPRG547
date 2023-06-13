@@ -49,7 +49,7 @@ public class SecondaryScreen extends JFrame implements ActionListener, MouseList
     public void connect(String serverName, int serverPort) throws InterruptedException { try
         {
             this.socket = new Socket(serverName, serverPort);
-
+            HandleIncoming();
         }
         catch (UnknownHostException uhe)
         {
