@@ -70,9 +70,9 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
     /**
      * Connect to ChatServer.java
-     * @param serverName
-     * @param serverPort
-     * @throws InterruptedException
+     * @param serverName Server Name
+     * @param serverPort Server Port
+     * @throws InterruptedException If connection is interrupted
      */
     public void connect(String serverName, int serverPort) throws InterruptedException {
         txtConnectionStatus.setText("Establishing connection. Please wait ...");
@@ -98,6 +98,9 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         }
     }
 
+    /**
+     * Send Data to the socket
+     */
     private void send() {
         try {
           msgToBeSent = topicBox.getText() + ": "
@@ -116,6 +119,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         }
     }
 
+    /**
+     * Handle Server Messages
+     * @param msg Message to be sent
+     */
     public void handle(String msg) {
         if (msg.equals(".bye")) {
             println("Good bye. Press EXIT button to exit ...");
@@ -126,7 +133,9 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         }
     }
 
-
+    /**
+     * Open Connection (Output Stream)
+     */
     public void open() {
         try {
             OutputStream s = socket.getOutputStream();
@@ -137,6 +146,9 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         }
     }
 
+    /**
+     * Close Connection (Output Stream)
+     */
     public void close() {
         try {
             if (streamOut != null) {
@@ -151,12 +163,20 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         client.stop();
     }
 
+    /**
+     * Print Line lbl Policy Title
+     * @param msg Message to be sent
+     */
     void println(String msg) {
         //display.appendText(msg + "\n");
         lblPolicyTitle.setText(msg);
     }
 
-
+    /**
+     * Get the parameters of the server
+     * Server Name
+     * Server Port
+     */
     public void getParameters()
     {
 //        serverName = getParameter("host");
@@ -198,7 +218,16 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     int rowIndex = 0;
     public BubbleSort bubble = new BubbleSort();
 
-
+    /**
+     * Initialise MainScreen
+     * Set Size
+     * Set Listeners
+     * Set Location
+     * Set Layout
+     * Set Params
+     * @throws IOException
+     *
+     */
     // Initialise Main Screen
     public mainScreen() throws IOException {
         //initialise main screen
@@ -229,6 +258,11 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     // JTable
 
     // Setup JTable
+
+    /**
+     * Setup Jtable for Questions
+     * @throws IOException
+     */
     public void setupTable() throws IOException {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
@@ -272,6 +306,11 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     }
 
     // Create Jtable Model
+
+    /**
+     * Create Table Model (MyModel)
+     * Uses al (Scripts.read.java)
+     */
     class MyModel extends AbstractTableModel
     {
         ArrayList<Object[]> al;
@@ -295,10 +334,19 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
         // method that needs to be overload. The row count is the size of the ArrayList
 
+        /**
+         * Get Row Count
+         * @return Size of Array (Number of Questions) [Rows]
+         */
         public int getRowCount()
         {
             return al.size();
         }
+
+        /**
+         * Get Col Count
+         * @return Size of Array (Number of Fields) [Cols]
+         */
 
         // method that needs to be overload. The column count is the size of our header
         public int getColumnCount()
@@ -307,17 +355,35 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         }
 
         // method that needs to be overload. The object is in the arrayList at rowIndex
+
+        /**
+         * Return Value From Index X Y
+         * @param rowIndex Y Rows in array
+         * @param columnIndex X Cols in array
+         * @return Value at X Y Pos
+         */
         public Object getValueAt(int rowIndex, int columnIndex)
         {
             return al.get(rowIndex)[columnIndex];
         }
 
         // a method to return the column name
+
+        /**
+         * Gets Name of col at index x
+         * @param index x col
+         * @return Col Name
+         */
         public String getColumnName(int index)
         {
             return header[index];
         }
 
+        /**
+         * Returns the class of the col X
+         * @param columnIndex X col
+         * @return Col Class
+         */
         public Class getColumnClass(int columnIndex)
         {
             if (columnIndex == col)
@@ -327,6 +393,12 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
             return super.getColumnClass(columnIndex); // Otherwise, set it to the default class
         }
 
+        /**
+         * Add a new line to the table
+         * @param qnno [i] identifier of question row
+         * @param topic [i] identifier of topic row
+         * @param subtopic [i] identifier of subtopic row
+         */
         // a method to add a new line to the table
         void add(String qnno, String topic, String subtopic)
         {
@@ -347,6 +419,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     // Bubble Sort
 
     // Setup Buttons
+
+    /**
+     * Setup JButtons
+     */
     private void SetupButtons()
     {
         // set up all buttons
@@ -365,6 +441,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
     }
     // Setup Lables
+
+    /**
+     * Setup JLabels
+     */
     private void SetupJlabels()
     {
         lblPolicyTitle = UIComponentLibrary.CreateAJLabel("                                              Policy Questions                                                                ", 0, 125, this, myLayout);
@@ -421,6 +501,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
     }
     // Setup Text Fields
+
+    /**
+     * Setup Text Fields
+     */
     private void SetupTextfields()
     {
         searchBox = UIComponentLibrary.CreateAJTextField(20,60,75,this,myLayout);
@@ -452,16 +536,35 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     }
     // Setup Functionality
 
+    /**
+     * Completes a bubble sort
+     * Source : Scripts.bubble.bubbleSort
+     * Uses : AL (Scripts.read.read)
+     */
     public void bubblesort()
     {
         bubble.bubbleSort(al);
     }
+    /**
+     * Completes a Selection sort
+     * Source : Scripts.SelectionSort.SelectionSort
+     * Uses : AL (Scripts.read.read)
+     */
     public void selectionsort() {
         SelectionSort.SelectionSort(al);
     }
+    /**
+     * Completes a Insertion sort
+     * Source : Scripts.InsertionSort.InsertionSort
+     * Uses : AL (Scripts.read.read)
+     */
     public void insertionSort() {
         InsertionSort.InsertionSort(al);
     }
+
+    /**
+     * Filters and searches through AL
+     */
     public void filterSearch() {
         String text = searchBox.getText();
         if (text.length() == 0) {
@@ -471,6 +574,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         }
     }
 
+    /**
+     * Displays question at row Y (Y = index)
+     * @param index row
+     */
     public void displayQuestion(int index)
  {
      txtqnNo.setText(al.get(index)[0].toString());
@@ -484,8 +591,16 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
      eBox.setText(al.get(index)[8].toString());
 
  }
+
+    /**
+     * Displays Question number at row Y (Y = index)
+     * @param index row
+     */
     public void displayQuestionNumber(int index){ questionBox.setText(al.get(index)[0].toString());}
 
+    /**
+     * Depreciated
+     */
     private void DisplayText()
     {
         rowIndex = Globaltable.getSelectedRow();
@@ -493,6 +608,9 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         topicBox.setText("Test");
     }
 
+    /**
+     * Depreciated
+     */
     private void search()
     {
         /*
@@ -507,6 +625,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     // End Functionality
 
     // action listner add
+
+    /**
+     * Adds a window listner to the form
+     */
     private void AddWindowListenerToForm()
     {
         addWindowListener(new WindowAdapter() {
@@ -518,6 +640,10 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
         });
     }
 
+    /**
+     * Once mouse clicked, Return row of index where clicked
+     * @param e Exception
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         rowIndex = Globaltable.getSelectedRow();
@@ -536,6 +662,11 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     @Override
     public void mouseExited(MouseEvent e) { }
     // Action Listener
+
+    /**
+     * If Action Performed using getSource()
+     * @param actionEvent Action
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) // action listner class
     {
@@ -616,7 +747,9 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
 
     }
 
-
+    /**
+     * Writes Data to file using hashmap
+     */
     public void writeFile()
     {
 
