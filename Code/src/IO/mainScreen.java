@@ -54,11 +54,12 @@ public class mainScreen extends JFrame implements ActionListener, MouseListener 
     }
 
 
-
-
-
-
-
+    /**
+     * Connect to ChatServer.java
+     * @param serverName
+     * @param serverPort
+     * @throws InterruptedException
+     */
     public void connect(String serverName, int serverPort) throws InterruptedException {
         txtConnectionStatus.setText("Establishing connection. Please wait ...");
         try
